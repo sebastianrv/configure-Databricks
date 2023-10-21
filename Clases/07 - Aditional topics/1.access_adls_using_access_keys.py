@@ -1,14 +1,16 @@
 # Databricks notebook source
+#conexion al Storage Account
 spark.conf.set(
-    "fs.azure.account.key.sa709037752.dfs.core.windows.net",
-    "itpWwgo6hBvGngxPIDuqerJ7rbIJDGp4g/KeWMvLuiwoXiGETsZCrV6z6Uii74WNU/b7ul9zb4gu+AStEg718w=="
+    "fs.azure.account.key.sarsv2023.dfs.core.windows.net",
+    "4laHHRo3eLqlGttXboMIODFDxL85I+F8AitgF5cPS2HB+2CfzW8Wh8PKzscgVan/CFG8/i5unlWk+AStABkbNA=="
 )
 
 # COMMAND ----------
 
-dbutils.fs.ls("abfss://raw@sa709037752.dfs.core.windows.net")
+#conexión al container
+dbutils.fs.ls("abfss://raw@sarsv2023.dfs.core.windows.net")
 
 # COMMAND ----------
 
-circuits_df = spark.read.csv("abfss://raw@sa709037752.dfs.core.windows.net/circuits.csv")
+circuits_df = spark.read.csv("abfss://raw@sarsv2023.dfs.core.windows.net/circuits.csv")
 display(circuits_df)
