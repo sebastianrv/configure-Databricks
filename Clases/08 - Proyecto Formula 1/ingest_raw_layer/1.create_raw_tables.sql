@@ -20,7 +20,7 @@ CREATE TABLE IF NOT EXISTS f1_raw.circuits(
   url STRING
 )
 USING csv
-OPTIONS (path "/mnt/sa70903775222/raw/circuits.csv", header true);
+OPTIONS (path "/mnt/sarsv2023/raw/circuits.csv", header true);
 
 -- COMMAND ----------
 
@@ -40,7 +40,7 @@ CREATE TABLE IF NOT EXISTS f1_raw.races(
   url STRING
 )
 USING csv
-OPTIONS (path "/mnt/sa70903775222/raw/races.csv", header true, delimiter ',');
+OPTIONS (path "/mnt/sarsv2023/raw/races.csv", header true, delimiter ',');
 
 -- COMMAND ----------
 
@@ -57,7 +57,7 @@ nationality STRING,
 url STRING
 )
 USING json
-OPTIONS (path "/mnt/sa70903775222/raw/constructors.json");
+OPTIONS (path "/mnt/sarsv2023/raw/constructors.json");
 
 -- COMMAND ----------
 
@@ -73,11 +73,37 @@ nationality STRING,
 url STRING
 )
 USING json
-OPTIONS (path "/mnt/sa70903775222/raw/drivers.json");
+OPTIONS (path "/mnt/sarsv2023/raw/drivers.json");
 
 -- COMMAND ----------
 
 -- MAGIC %md ###Create results table
+
+-- COMMAND ----------
+
+DROP TABLE IF EXISTS f1_raw.results;
+CREATE TABLE IF NOT EXISTS f1_raw.results(
+resultId INT,
+raceId INT,
+driverId INT,
+constructorId INT,
+number INT,
+grid INT,
+position INT,
+positionText STRING,
+positionOrder INT,
+points FLOAT,
+laps INT,
+time STRING,
+milliseconds INT,
+fastestLap INT,
+rank INT,
+fastestLapTime STRING,
+fastestLapSpeed STRING,
+statusId INT
+)
+USING json
+OPTIONS (path "/mnt/sarsv2023/raw/results.json");
 
 -- COMMAND ----------
 
@@ -102,7 +128,7 @@ CREATE TABLE IF NOT EXISTS f1_raw.qualifying(
  q3 STRING
 )
 USING json
-OPTIONS (path "/mnt/sa70903775222/raw/qualifying");
+OPTIONS (path "/mnt/sarsv2023/raw/qualifying");
 
 -- COMMAND ----------
 
@@ -120,13 +146,26 @@ time STRING,
 milliseconds INT
 )
 USING csv
-OPTIONS (path "/mnt/sa70903775222/raw/lap_times");
+OPTIONS (path "/mnt/sarsv2023/raw/lap_times");
 
 -- COMMAND ----------
 
 CREATE DATABASE IF NOT EXISTS f1_processed
-LOCATION "/mnt/sa70903775222/processed"
+LOCATION "/mnt/sarsv2023/processed"
 
 -- COMMAND ----------
 
+--RESUMEN:
+--
+--Fuente cargada:
+--Circuits.csv
+--races.csv
+--constructors.json
+--results.json
+--drivers.json
+--qualifying
+--lap_times
 
+-- COMMAND ----------
+
+select * from f1_raw.results;
